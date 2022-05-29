@@ -70,19 +70,23 @@
       const textEl = document.querySelector(".text");
       linkActive.addEventListener("click", event => {
         for (const el of navLink) {
+          if (!event.target.classList.contains("nav-link")) {
+            return;
+          }
           el.classList.remove("active");
         }
         event.target.classList.add("active");
         // console.log(event.target.parentNode.dataset.text);
-        if (event.target.parentNode.dataset.text === "X6") {
-          textEl.textContent = panelText.X6;
-        }
-        if (event.target.parentNode.dataset.text === "T1") {
-          textEl.textContent = panelText.T1;
-        }
-        if (event.target.parentNode.dataset.text === "H99") {
-          textEl.textContent = panelText.H99;
-        }
+        // if (event.target.parentNode.dataset.text === "X6") {
+        //   textEl.textContent = panelText.X6;
+        // }
+        // if (event.target.parentNode.dataset.text === "T1") {
+        //   textEl.textContent = panelText.T1;
+        // }
+        // if (event.target.parentNode.dataset.text === "H99") {
+        //   textEl.textContent = panelText.H99;
+        // }
+        textEl.textContent = panelText[event.target.parentNode.dataset.text];
       });
 
       /*
@@ -93,6 +97,7 @@
        */
       const txt = document.querySelector("#inputDiv");
       const inpRng = document.querySelector("input");
+      inpRng.value = Number.parseInt(getComputedStyle(txt).fontSize);
       inpRng.addEventListener("input", () => {
         txt.style.fontSize = inpRng.value + "px";
       });
